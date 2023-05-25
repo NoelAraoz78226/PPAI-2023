@@ -12,9 +12,20 @@ namespace PPAI_2023
 {
     public partial class PantallaRegistrarRespuesta : Form
     {
+        private GestorRegistarRespuesta gestor;
+
+        internal GestorRegistarRespuesta Gestor { get => gestor; set => gestor = value; }
+
         public PantallaRegistrarRespuesta()
         {
             InitializeComponent();
+            gestor = new GestorRegistarRespuesta(this);
+            
         }
+
+
+
+
+        
     }
 }

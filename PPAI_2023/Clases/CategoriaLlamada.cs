@@ -14,6 +14,17 @@ namespace PPAI_2023.Clases
         private int nroOrden;
         private List<OpcionLlamada> opcion;//1..*
 
+        public CategoriaLlamada(string audioMensajeOpciones, string mensajesOpciones, string nombre, int nroOrden, List<OpcionLlamada> opcion)
+        {
+            this.audioMensajeOpciones = audioMensajeOpciones;
+            this.mensajesOpciones = mensajesOpciones;
+            this.nombre = nombre;
+            this.nroOrden = nroOrden;
+            this.opcion = opcion;
+        }
+
+        public CategoriaLlamada() { }
+
         public string AudioMensajeOpciones { get => audioMensajeOpciones; set => audioMensajeOpciones = value; }
         public string MensajesOpciones { get => mensajesOpciones; set => mensajesOpciones = value; }
         public string Nombre { get => nombre; set => nombre = value; }
@@ -22,8 +33,14 @@ namespace PPAI_2023.Clases
 
         public void getAudioMensajeOpciones() { }
         
-        public void getDescripcionCategoriaYOpcion() { }
+        public void getDescripcionCategoriaYOpcion(OpcionLlamada opSelecionada, SubOpcionLlamada subOpseleccionada ) {
+            opSelecionada.getAudioMensajeSubOpciones(subOpseleccionada);
 
-        public void getValidacioes() { }
+            
+        }
+            
+        public void getValidacioes(OpcionLlamada opSelecionada, SubOpcionLlamada subOpseleccionada) {
+            opSelecionada.getValidaciones(subOpseleccionada);
+        }
     }
 }

@@ -72,6 +72,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GestorRegistarRespuesta.cs" />
+    <Compile Include="InterfazIVR.cs" />
     <Compile Include="PantallaRegistrarRespuesta.cs">
       <SubType>Form</SubType>
     </Compile>

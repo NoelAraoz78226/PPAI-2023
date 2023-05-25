@@ -10,6 +10,13 @@ namespace PPAI_2023.Clases
     {
         private string nombre;
 
+        public Estado(string nombre)
+        {
+            this.nombre = nombre;
+        }
+
+        public Estado() { }
+
         public string Nombre { get => nombre; set => nombre = value; }
 
         public void esFinalizada() { }

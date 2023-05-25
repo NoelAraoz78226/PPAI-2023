@@ -11,6 +11,14 @@ namespace PPAI_2023.Clases
         private bool correcta;
         private string desscripcion;
 
+        public OpcionValidacion(bool correcta, string desscripcion)
+        {
+            this.correcta = correcta;
+            this.desscripcion = desscripcion;
+        }
+
+        public OpcionValidacion() { }
+
         public bool Correcta { get => correcta; set => correcta = value; }
         public string Desscripcion { get => desscripcion; set => desscripcion = value; }
 

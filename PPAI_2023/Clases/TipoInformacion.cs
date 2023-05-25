@@ -10,6 +10,13 @@ namespace PPAI_2023.Clases
     {
         private string descripcion;
 
+        public TipoInformacion(string descripcion)
+        {
+            this.descripcion = descripcion;
+        }
+
+        public TipoInformacion() { }
+
         public string Descripcion { get => descripcion; set => descripcion = value; }
 
         public void getDescripcion() { }

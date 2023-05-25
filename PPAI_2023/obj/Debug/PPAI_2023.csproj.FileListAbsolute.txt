@@ -7,3 +7,12 @@ C:\Users\noela\Desktop\PPAI_2023\PPAI_2023\obj\Debug\PPAI_2023.csproj.GenerateRe
 C:\Users\noela\Desktop\PPAI_2023\PPAI_2023\obj\Debug\PPAI_2023.csproj.CoreCompileInputs.cache
 C:\Users\noela\Desktop\PPAI_2023\PPAI_2023\obj\Debug\PPAI_2023.exe
 C:\Users\noela\Desktop\PPAI_2023\PPAI_2023\obj\Debug\PPAI_2023.pdb
+C:\Users\noela\Desktop\PPAI-2023\PPAI_2023\bin\Debug\PPAI_2023.exe.config
+C:\Users\noela\Desktop\PPAI-2023\PPAI_2023\bin\Debug\PPAI_2023.exe
+C:\Users\noela\Desktop\PPAI-2023\PPAI_2023\bin\Debug\PPAI_2023.pdb
+C:\Users\noela\Desktop\PPAI-2023\PPAI_2023\obj\Debug\PPAI_2023.csproj.AssemblyReference.cache
+C:\Users\noela\Desktop\PPAI-2023\PPAI_2023\obj\Debug\PPAI_2023.Properties.Resources.resources
+C:\Users\noela\Desktop\PPAI-2023\PPAI_2023\obj\Debug\PPAI_2023.csproj.GenerateResource.cache
+C:\Users\noela\Desktop\PPAI-2023\PPAI_2023\obj\Debug\PPAI_2023.csproj.CoreCompileInputs.cache
+C:\Users\noela\Desktop\PPAI-2023\PPAI_2023\obj\Debug\PPAI_2023.exe
+C:\Users\noela\Desktop\PPAI-2023\PPAI_2023\obj\Debug\PPAI_2023.pdb

@@ -12,11 +12,31 @@ namespace PPAI_2023.Clases
         private int nroOrden;
         private List<Validacion> validacionRequerida;//0..*
 
+        public SubOpcionLlamada(string nombre, int nroOrden, List<Validacion> validacionRequerida)
+        {
+            this.nombre = nombre;
+            this.nroOrden = nroOrden;
+            this.validacionRequerida = validacionRequerida;
+        }
+
+        public SubOpcionLlamada() { }
+
         public string Nombre { get => nombre; set => nombre = value; }
         public int NroOrden { get => nroOrden; set => nroOrden = value; }
         internal List<Validacion> ValidacionRequerida { get => validacionRequerida; set => validacionRequerida = value; }
 
         public void esNro() { }
-        public void getNombre() { }
+        public string getNombre() {
+            return nombre;
+        }
+
+        public void getValidaciones(List<Validacion> listaValidaciones)
+        {
+            foreach(Validacion validacion in listaValidaciones)
+            {
+                validacion.getMensajeValidacion();
+            }
+            
+        }
     }
 }
