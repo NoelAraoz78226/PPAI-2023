@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PPAI_2023.Clases
 {
-    class Validacion
+    public class Validacion
     {
-        private string audioMensajeValidacion; // 
+        private string audioMensajeValidacion; // opcion1: x fecha, opcio2: x fecha
         private string nombre;//fecha nacimineto
         private int nroOrden;//es el numero de orden en el vector de las validaciones de la subOpcion
         private List<OpcionValidacion> listaOpcionValidacion;
@@ -36,7 +36,9 @@ namespace PPAI_2023.Clases
         internal List<OpcionValidacion> ListaOpcionValidacion { get => listaOpcionValidacion; set => listaOpcionValidacion = value; }
         internal TipoInformacion Tipo { get => tipo; set => tipo = value; }
 
-        public void getAudioMensajeValidacion() { }
+        public string getAudioMensajeValidacion() {
+            return audioMensajeValidacion;
+        }
         public string getMensajeValidacion() {
 
             return audioMensajeValidacion;

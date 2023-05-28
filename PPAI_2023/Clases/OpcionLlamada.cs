@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI_2023.Clases
 {
-    class OpcionLlamada
+    public class OpcionLlamada
     {
         private string aundioMensaSubOpciones;
         private string mensajeSubOpciones;
@@ -34,13 +34,19 @@ namespace PPAI_2023.Clases
         public int NroOrden { get => nroOrden; set => nroOrden = value; }
         internal List<SubOpcionLlamada> SubOpcionLlamada { get => subOpcionLlamada; set => subOpcionLlamada = value; }
         internal List<Validacion> ValidacionesRequeridas { get => validacionesRequeridas; set => validacionesRequeridas = value; }
-
+            
         public void getAudioMensajeSubOpciones(SubOpcionLlamada subOp) {
             subOp.getNombre();
         }
-        public void descripcionConSubOpcion() { }
-        public void getValidaciones(SubOpcionLlamada subOp) {
-            subOp.getValidaciones(subOp.ValidacionRequerida);
+        public (string nombreOp, string nomSubOp) getDescripcionConSubOpcion(SubOpcionLlamada subOp) {
+
+            string nombreOpcion = this.nombre;
+            string nombreSubOpcion = subOp.getNombre();
+
+            return (nombreOpcion, nombreSubOpcion);
+        }
+        public (List<string>, List<string>) getValidaciones(SubOpcionLlamada subOp) {
+            return subOp.getValidaciones(subOp);
         }
 
     }

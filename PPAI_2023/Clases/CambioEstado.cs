@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI_2023.Clases
 {
-    class CambioEstado
+public class CambioEstado
     {
         private DateTime fechaHoraInicio;
         private Estado estado;

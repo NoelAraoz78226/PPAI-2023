@@ -16,3 +16,4 @@ C:\Users\noela\Desktop\PPAI-2023\PPAI_2023\obj\Debug\PPAI_2023.csproj.GenerateRe
 C:\Users\noela\Desktop\PPAI-2023\PPAI_2023\obj\Debug\PPAI_2023.csproj.CoreCompileInputs.cache
 C:\Users\noela\Desktop\PPAI-2023\PPAI_2023\obj\Debug\PPAI_2023.exe
 C:\Users\noela\Desktop\PPAI-2023\PPAI_2023\obj\Debug\PPAI_2023.pdb
+C:\Users\noela\Desktop\PPAI-2023\PPAI_2023\obj\Debug\PPAI_2023.PantallaRegistrarRespuesta.resources

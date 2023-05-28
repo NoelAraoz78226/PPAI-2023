@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI_2023.Clases
 {
-    class CategoriaLlamada
+ public class CategoriaLlamada
     {
         private string audioMensajeOpciones;
         private string mensajesOpciones;
@@ -33,14 +33,20 @@ namespace PPAI_2023.Clases
 
         public void getAudioMensajeOpciones() { }
         
-        public void getDescripcionCategoriaYOpcion(OpcionLlamada opSelecionada, SubOpcionLlamada subOpseleccionada ) {
+        public (string nomCat, string nomOp, string nomSub) getDescripcionCategoriaYOpcion(OpcionLlamada opSelecionada, SubOpcionLlamada subOpseleccionada ) {
             opSelecionada.getAudioMensajeSubOpciones(subOpseleccionada);
+            
+            (string nombreOp, string nomSubOp) = opSelecionada.getDescripcionConSubOpcion(subOpseleccionada);
+
+            return (this.nombre, nombreOp, nomSubOp);
 
             
         }
             
-        public void getValidacioes(OpcionLlamada opSelecionada, SubOpcionLlamada subOpseleccionada) {
-            opSelecionada.getValidaciones(subOpseleccionada);
+        public (List<string>, List<string>) getValidacioes(OpcionLlamada opSelecionada, SubOpcionLlamada subOpseleccionada) {
+
+
+            return opSelecionada.getValidaciones(subOpseleccionada);
         }
     }
 }

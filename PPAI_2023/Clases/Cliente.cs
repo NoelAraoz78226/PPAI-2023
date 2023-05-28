@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace PPAI_2023.Clases
 {
-    class Cliente
+public class Cliente
     {
         private int dni;
         private string nombreCompleto;
         private int nroCelular;
         private List<InformacionCliente> info;//1..*
+        
 
         public Cliente(int dni, string nombreCompleto, int nroCelular, List<InformacionCliente> info)
         {
@@ -33,6 +34,21 @@ namespace PPAI_2023.Clases
             return nombreCompleto;
         }
 
-        public void esInformacionCorrecta() { }
+        public bool esInformacionCorrecta(string res) {
+            bool resultado = false;
+            for (int i = 0; i < info.Count; i++)
+            {
+                if (info[i].DatoAValidar == res)
+                {
+                    resultado = true;
+                }
+            }
+
+
+            return resultado;
+
+            
+            
+        }
     }
 }

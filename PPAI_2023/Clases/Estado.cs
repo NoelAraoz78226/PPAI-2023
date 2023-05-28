@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI_2023.Clases
 {
-    class Estado
+    public class Estado
     {
         private string nombre;
 
@@ -19,8 +19,26 @@ namespace PPAI_2023.Clases
 
         public string Nombre { get => nombre; set => nombre = value; }
 
-        public void esFinalizada() { }
+        public bool esFinalizada() {
+            bool resultado = false;
+
+            if (nombre == "Finalizado")
+            {
+                resultado = true;
+            }
+
+            return resultado;
+        }
         public void esIniciada() { }
-        public void esEnCurso() { }
+        public bool esEnCurso() {
+            bool resultado = false;
+
+            if (nombre == "EnCurso")
+            {
+                resultado = true;
+            }
+
+            return resultado;
+        }
     }
 }

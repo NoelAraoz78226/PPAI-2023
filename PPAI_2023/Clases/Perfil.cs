@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI_2023.Clases
 {
-    class Perfil
+    public  class Perfil
     {
         private string descripcion;
         private string nombre;

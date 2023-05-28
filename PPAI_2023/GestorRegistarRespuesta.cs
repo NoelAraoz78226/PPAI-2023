@@ -7,15 +7,16 @@ using PPAI_2023.Clases;
 
 namespace PPAI_2023
 {
-    class GestorRegistarRespuesta
+public class GestorRegistarRespuesta
     {
         private PantallaRegistrarRespuesta pantallaRegistarRespuesta;
-        private InterfazIVR interfaz;
+        
 
         private Llamada llamadaActual;
         private CategoriaLlamada categoriaLlamadaActual;
         private OpcionLlamada opcionLlamadaActual;
         private SubOpcionLlamada subOpcionLlamadaActual;
+        
         private Estado estadoEnCurso;
         private Estado estadoFinalizado;
         private List<Validacion> mensajesValidacion;
@@ -25,6 +26,10 @@ namespace PPAI_2023
         private DateTime fechaHoraActual;
         private string nombreCliente;
         private List<Estado> listaEstados;
+        private List<Validacion> listaValidacion;
+        private string descripcion;
+        
+
 
         public DateTime DuracionLlmada { get => duracionLlmada; set => duracionLlmada = value; }
         public DateTime FechaHoraActual { get => fechaHoraActual; set => fechaHoraActual = value; }
@@ -39,17 +44,15 @@ namespace PPAI_2023
         internal List<RespuestaCliente> RespuestaSeleccionadas { get => respuestaSeleccionadas; set => respuestaSeleccionadas = value; }
         internal List<Estado> ListaEstados { get => listaEstados; set => listaEstados = value; }
         internal Estado EstadoFinalizado { get => estadoFinalizado; set => estadoFinalizado = value; }
-
-        /*La llamada, categoría, opción y sub-opcion (si corresponde) son recibidas desde el CU 1 Registrar Llamada, donde 
-        la llamada fue creada al momento de iniciarse y asociada al cliente identificado, y la categoría y opciones fueron
-        seleccionadas por el cliente*/
+        public string Descripcion { get => descripcion; set => descripcion = value; }
 
         public GestorRegistarRespuesta() { }
-
         public GestorRegistarRespuesta(PantallaRegistrarRespuesta pantalla)
         {
-            this.pantallaRegistarRespuesta = pantalla;
-            InterfazIVR interfaz = new InterfazIVR();
+
+
+            
+            pantallaRegistarRespuesta = pantalla;
             listaEstados = new List<Estado>();
             Estado estado1 = new Estado("EnCurso");
             Estado estado2 = new Estado("Finalizado");
@@ -59,21 +62,26 @@ namespace PPAI_2023
 
         }
 
-
+        
         public void nuevaRtaOperador(Llamada llamada, CategoriaLlamada cat, OpcionLlamada op, SubOpcionLlamada subOp) {
 
             //asigno la informacion que me viene del otro caso de uso a mis atributos
-            LlamadaActual = llamada;
+
             
-            CategoriaLlamadaActual = cat;
+            LlamadaActual = llamada;
 
-            OpcionLlamadaActual = op;
+            //categoriaLlamadaActual = new CategoriaLlamada();
+            categoriaLlamadaActual = cat;
 
-            SubOpcionLlamadaActual = subOp;
+            //opcionLlamadaActual = new OpcionLlamada();
+            opcionLlamadaActual = op;
+
+            //subOpcionLlamadaActual = new SubOpcionLlamada();
+            subOpcionLlamadaActual = subOp;
 
 
             //metodos de la ralizacion
-            buscarEstadoEnCurso();
+            estadoEnCurso = buscarEstadoEnCurso();
             getFechaHoraActual();
             llamadaActual.tomadaPorOperador(fechaHoraActual,EstadoEnCurso);
             buscarDatosLlamada();
@@ -83,10 +91,14 @@ namespace PPAI_2023
         public Estado buscarEstadoEnCurso() {
 
             estadoEnCurso = new Estado();
-            listaEstados = new List<Estado>();
+            
             foreach(Estado estado in listaEstados)
             {
-                estadoEnCurso = estado;
+                if (estado.esEnCurso())
+                {
+                    estadoEnCurso = estado;
+                }
+                
             }
 
             return estadoEnCurso;
@@ -99,21 +111,61 @@ namespace PPAI_2023
 
 
         public void buscarDatosLlamada() {
-            llamadaActual.getCliente();
-            categoriaLlamadaActual = new CategoriaLlamada();
-            categoriaLlamadaActual.getDescripcionCategoriaYOpcion(opcionLlamadaActual,subOpcionLlamadaActual);
-            categoriaLlamadaActual.getValidacioes(opcionLlamadaActual, subOpcionLlamadaActual);
+            nombreCliente = llamadaActual.getCliente();
+
+           
+            (string nomCat, string nomOp, string nomSub)=categoriaLlamadaActual.getDescripcionCategoriaYOpcion(opcionLlamadaActual,subOpcionLlamadaActual);
+
+            pantallaRegistarRespuesta.mostrarLLamada(nombreCliente,nomCat,nomOp,nomSub);
+
+
+            (List<string> audios, List<string> nombres)= categoriaLlamadaActual.getValidacioes(opcionLlamadaActual, subOpcionLlamadaActual);
+
+
+            pantallaRegistarRespuesta.mostrarOPValidacion(audios, nombres);
         }
 
 
 
-        public void tomarOpValidacion() { }
-        public void tomarRespuestas() { }
-        public void tomarConfirmacion() { }
-        public void llamarCURegistrarAccionRequerida() { }
-        public void buscarEstadoFinalizada() { }
+        public bool tomarOpValidacion(string res) {
+
+            return LlamadaActual.validarInformacionCliente(res);
+        }
+        public void tomarRespuestas(string des) {
+            this.descripcion = des;
+            pantallaRegistarRespuesta.solicitarConfirmacionDeLaOperacion();
+            
+        }
+        public void tomarConfirmacion() {
+            llamarCURegistrarAccionRequerida();
+            this.estadoFinalizado = buscarEstadoFinalizada();
+            
+            this.duracionLlmada = llamadaActual.getDuracion(fechaHoraActual);
+            getFechaHoraActual();
+            llamadaActual.finalizar(fechaHoraActual,estadoFinalizado);
+            finCU();
+        }
+        public void llamarCURegistrarAccionRequerida() {
+                //extend
+        }
+        public Estado buscarEstadoFinalizada() {
+            estadoFinalizado = new Estado();
+
+            foreach (Estado estado in listaEstados)
+            {
+                if (estado.esFinalizada())
+                {
+                    estadoFinalizado = estado;
+                }
+
+            }
+
+            return estadoFinalizado;
+        }
         
-        public void finCU() { }
+        public void finCU() {
+            pantallaRegistarRespuesta.Close();
+        }
 
     }
 }

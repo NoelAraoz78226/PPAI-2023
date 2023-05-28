@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI_2023.Clases
 {
-    class Pregunta
+    public class Pregunta
     {
         private string preguntaEncuesta;
         private List<RespuestaPosible> respuesta;

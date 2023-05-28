@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI_2023.Clases
 {
-    class Usuario
+    public class Usuario
     {
         private bool activo;
         private DateTime fechaAlta;

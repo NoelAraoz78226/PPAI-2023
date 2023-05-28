@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI_2023.Clases
 {
-    class OpcionValidacion
+    public  class OpcionValidacion
     {
         private bool correcta;
         private string desscripcion;

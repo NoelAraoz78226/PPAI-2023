@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI_2023.Clases
 {
-    class TipoInformacion
+    public class TipoInformacion
     {
         private string descripcion;
 

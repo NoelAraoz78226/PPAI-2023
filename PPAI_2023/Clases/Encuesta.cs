@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI_2023.Clases
 {
-    class Encuesta
+    public class Encuesta
     {
         private string descripcion;
         private DateTime fechaFinVigencia;

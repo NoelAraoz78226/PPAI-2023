@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI_2023.Clases
 {
-    class Llamada
+public class Llamada
     {
 
         private string descripcionOperador;
@@ -62,17 +62,40 @@ namespace PPAI_2023.Clases
         }
         public CambioEstado crearNuevoCambioEstado(DateTime fechaHora, Estado estado) {
             CambioEstado nuevoCambioEstado = new CambioEstado(fechaHora, estado);
+            nuevoCambioEstado.Estado = estado;
             ListaCambioEstado.Add(nuevoCambioEstado);
 
             return nuevoCambioEstado;
         }
 
-        public void getCliente() {
-            this.Cliente.getNombre();
+        public string getCliente() {
+            return this.Cliente.getNombre();
         }
-        public void validarInformacionCliente() { }
-        public void calcularDuracion() { }
-        public void finalizar() { }
+        public bool validarInformacionCliente(string res) {
+
+            return cliente.esInformacionCorrecta(res);
+        }
+
+        public DateTime getDuracion(DateTime horaInicio)
+        {
+            DateTime horaFin = DateTime.Now;
+            return calcularDuracion(horaInicio,horaFin);
+
+        }
+        public DateTime calcularDuracion(DateTime inicio, DateTime fin) {
+
+            
+            int minutosIn = (inicio.Minute)-10;
+            int minFin = fin.Minute;
+            int calculo = minFin - minutosIn;
+            duracion = new DateTime();
+            
+            return duracion.AddMinutes(calculo);
+
+        }
+        public void finalizar(DateTime fechaHora, Estado estadoFinalizado) {
+            crearNuevoCambioEstado(fechaHora, estadoFinalizado);
+        }
         public void cancelarLlamamda() { }
         public void registrarLlamada() { }
 

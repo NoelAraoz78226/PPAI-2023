@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPAI_2023.Clases
 {
-    class SubOpcionLlamada
+    public class SubOpcionLlamada
     {
         private string nombre;
         private int nroOrden;
@@ -30,13 +30,21 @@ namespace PPAI_2023.Clases
             return nombre;
         }
 
-        public void getValidaciones(List<Validacion> listaValidaciones)
+        public (List<string>, List<string>) getValidaciones(SubOpcionLlamada sub)
         {
-            foreach(Validacion validacion in listaValidaciones)
-            {
-                validacion.getMensajeValidacion();
-            }
+            List<string> audios = new List<string>();
+            List<string> nombres = new List<string>();
             
+
+            foreach (var validacion in validacionRequerida)
+            {
+                audios.Add(validacion.AudioMensajeValidacion);
+                nombres.Add(validacion.Nombre);
+                
+                
+            }
+
+            return (audios, nombres);
         }
     }
 }
