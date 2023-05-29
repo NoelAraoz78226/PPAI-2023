@@ -15,17 +15,25 @@ namespace PPAI_2023
     {
         private GestorRegistarRespuesta gestor;
         private InterfazIVR interfazIVR;
-        private Button boton;
-        bool bandera1, bandera2;
+        private int contador= 0;
+        private List<string> fechas;
+        private List<string> codigos;
+        private List<string> nombres;
+        private List<List<string>> validaciones;
+
 
         public GestorRegistarRespuesta Gestor { get => gestor; set => gestor = value; }
-        public Button Boton { get => boton; set => boton = value; }
+        public List<List<string>> Validaciones { get => validaciones; set => validaciones = value; }
+        public int Contador { get => contador; set => contador = value; }
 
         public PantallaRegistrarRespuesta()
         {
             InitializeComponent();
             interfazIVR = new InterfazIVR(this);
             gestor = interfazIVR.gestor;
+           
+
+           
         }
 
         public void mostrarLLamada(string nombreCliente,string nomCat, string nomOp, string nomSub)
@@ -36,131 +44,99 @@ namespace PPAI_2023
             lblNombreSubOpcion.Text = nomSub;
         }
 
-        public void mostrarOPValidacion(List<string> listaAudio, List<string> listaNombre)
+        public void mostrarOPValidacion(List<List<string>> listaMensajes, List<string> listaNombre)
         {
+            fechas = new List<string>();
+        
+            foreach (var item in listaMensajes[0])
+            {
+                fechas.Add(item);
+            }
+            codigos = new List<string>();
+            foreach (var item in listaMensajes[1])
+            {
+                codigos.Add(item);
+            }
+
+            nombres = new List<string>();
+            foreach (var item in listaNombre)
+            {
+                nombres.Add(item);
+            }
+
+            validaciones = new List<List<string>>();
+            validaciones.Add(fechas);
+            validaciones.Add(codigos);
+
+            gp1.Text = nombres[contador];
+            lblTituloFecha.Text = "Ingrese la opcion de "+ nombres[contador] + "\n";
+            lblOpcion1.Text = "[1]-" + validaciones[contador][0];
+            lblOpcion2.Text = "[2]-" + validaciones[contador][1];
+            lblOpcion3.Text = "[3]-" + validaciones[contador][2];
 
 
-            gp1.Text = listaNombre[0];
-            lblAudio1.Text = listaAudio[0];
-
-            gp2.Text = listaNombre[1];
-            lblAudio2.Text = listaAudio[1];
-
-
-
-            //for (int i = 0; i < listaAudio.Count; i++)
-            //{
-
-            //    Label nombreValidacion = new Label();
-            //    nombreValidacion.Text = listaNombre[i];
-            //    nombreValidacion.AutoSize = true;
-            //    nombreValidacion.Margin = new Padding(0,10, 0, 5);
-            //    boton = new Button();
-            //    boton.Text = "Enviar";
-            //    boton.Click += BotonEnviar_Click;
-
-
-            //    Label validacion = new Label();
-            //    validacion.Text = listaAudio[i];
-            //    validacion.AutoSize = true;
-            //    validacion.Margin = new Padding(0, 10, 0, 5);
-
-
-
-            //    TextBox campoValidcacion = new TextBox();
-
-
-            //    panel.Controls.Add(nombreValidacion);
-            //    panel.Controls.Add(validacion);
-            //    panel.Controls.Add(campoValidcacion);
-            //    panel.Controls.Add(boton);
-
-            //}
         }
-
-        //private void BotonEnviar_Click(object sender, EventArgs e)
-        //{
-        //    TextBox mensajaCorrecto = new TextBox();
-        //    mensajaCorrecto.Text = "correcto";
-        //    panel.Controls.Add(mensajaCorrecto);
-        //    boton.Enabled = false;
-            
-            
- 
-        //}
 
         private void btnEnviar1_Click(object sender, EventArgs e)
         {
 
-            string respuesta = "";
-            if (txtFecha.Text == "1")
-            {
-                respuesta = "12 de Julio de 1983";
-            }
-            else if (txtFecha.Text == "2")
-            {
-                respuesta = "12 de diciembre de 19883";
-            }
-            else
-            {
-                respuesta = "12 octubre de 1983";
-            }
-
+            int seleccion =Convert.ToInt32(txtOpcionFecha.Text);
+            string respuesta = validaciones[contador][seleccion - 1];
+            
 
 
             bool correcta = tomarOpValidacion(respuesta);
-
-            if (correcta)
-            {
-                lblCorrecta.Text = "CORRECTO";
-                bandera1 = true;
-            }
-
-
-        }
-
-        public bool tomarOpValidacion(string res)
-        {
-            
-            return gestor.tomarOpValidacion(res);
             
 
-        }
-
-        private void btnEnviar2_Click(object sender, EventArgs e)
-        {
-            string res = "";
-            if (txtCodigo.Text == "1")
+            if(txtOpcionFecha.Text == "") 
             {
-                res = "3663";
-            }
-            else if (txtCodigo.Text == "2")
-            {
-                res = "6060";
+                MessageBox.Show("Ingrese una opcion");
             }
             else
             {
-                res = "5986";
-            }
+                if (correcta)
+                {
+                    txtOpcionFecha.Text = "";
+                    MessageBox.Show("Opcion Correcta");
+                    if(contador < validaciones.Count)
+                    {
+                           
+                        lblTituloFecha.Text = "Ingerese la opcion de" + nombres[contador] +"\n";
+                        lblOpcion1.Text = "[1]-" + validaciones[contador][0];
+                        lblOpcion2.Text = "[2]-" + validaciones[contador][1];
+                        lblOpcion3.Text = "[3]-" + validaciones[contador][2];
+                    }
+                    else
+                    {
+                        habilitarSeccionRespuesta();
+                    }
+                    
+                }
+                else
+                {
+                    MessageBox.Show("Opcion Incorrecta, vuelva a comunicarse por favor");
 
-
-
-            bool correcta = tomarOpValidacion(res);
-
-            if (correcta)
-            {
-                lblCorrectoCodigo.Text = "CORRECTO";
-                bandera2 = true;
-            }
-
-            if(bandera1 && bandera2)
-            {
-                habilitarSeccionRespuesta();
-            }
+                    gestor.tomarCancelacion();
+                }
+            }         
         }
 
-     
-        public void habilitarSeccionRespuesta() { //pediRespuesta
+
+        public bool tomarOpValidacion(string res)
+        {
+
+            bool resultado= gestor.tomarOpValidacion(res);
+            if (resultado)
+            {
+                contador += 1;
+            }
+
+            return resultado;
+        }
+
+
+
+        public void habilitarSeccionRespuesta() { 
 
             gbSeccionRespuesta.Visible = true;
             
@@ -168,8 +144,16 @@ namespace PPAI_2023
         }
         private void ingresaRespuesta(object sender, EventArgs e)
         {
-            string descripcion = txtDescripcion.Text;
-            gestor.tomarRespuestas(descripcion);
+            if (txtDescripcion.Text == "")
+            {
+                MessageBox.Show("Ingrese alguna descripcion");
+            }
+            else
+            {
+                string descripcion = txtDescripcion.Text;
+                gestor.tomarRespuestas(descripcion);
+            }
+            
         }
 
 
@@ -189,5 +173,18 @@ namespace PPAI_2023
 
 
 
+
+
+        //ALTERNATIVAS
+
+        private void tomarLlamadaColgada(object sender, EventArgs e)
+        {
+            gestor.tomarCancelacion();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

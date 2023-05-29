@@ -30,19 +30,19 @@ namespace PPAI_2023.Clases
             return nombre;
         }
 
-        public (List<string>, List<string>) getValidaciones(SubOpcionLlamada sub)
+        public (List<List<string>>, List<string>) getValidaciones(SubOpcionLlamada sub)
         {
-            List<string> audios = new List<string>();
+            List<List<string>> audios = new List<List<string>>();
             List<string> nombres = new List<string>();
             
 
             foreach (var validacion in validacionRequerida)
             {
-                audios.Add(validacion.AudioMensajeValidacion);
+                audios.Add(validacion.getMensajeValidacion());
                 nombres.Add(validacion.Nombre);
-                
-                
+                        
             }
+
 
             return (audios, nombres);
         }

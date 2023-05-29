@@ -96,8 +96,13 @@ public class Llamada
         public void finalizar(DateTime fechaHora, Estado estadoFinalizado) {
             crearNuevoCambioEstado(fechaHora, estadoFinalizado);
         }
-        public void cancelarLlamamda() { }
-        public void registrarLlamada() { }
+
+
+        //ALTERNATIVAS
+        public void cancelarLlamada(DateTime fechaHora, Estado estadoCencelado)
+        {
+            crearNuevoCambioEstado(fechaHora, estadoCencelado);
+        }
 
     }
 }

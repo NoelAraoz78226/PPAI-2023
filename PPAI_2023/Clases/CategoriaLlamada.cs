@@ -43,7 +43,7 @@ namespace PPAI_2023.Clases
             
         }
             
-        public (List<string>, List<string>) getValidacioes(OpcionLlamada opSelecionada, SubOpcionLlamada subOpseleccionada) {
+        public (List<List<string>>, List<string>) getValidacioes(OpcionLlamada opSelecionada, SubOpcionLlamada subOpseleccionada) {
 
 
             return opSelecionada.getValidaciones(subOpseleccionada);

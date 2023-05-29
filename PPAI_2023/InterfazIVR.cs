@@ -70,17 +70,15 @@ namespace PPAI_2023
             listaOpcionesVal.Add(fecha2);
             listaOpcionesVal.Add(fecha3);
 
-           
+            List<string> listaMensajesFechas = new List<string>();
+            listaMensajesFechas.Add("12 de Julio de 1983");
+            listaMensajesFechas.Add("12 de diciembre de 19883");
+            listaMensajesFechas.Add("12 octubre de 1983");
 
             //ValidacionSubOpcion
-            Validacion validacionSubOp = new Validacion("Seleccione la opción elegida: \n" +
-                                                        "-Opcion 1: 12 de Julio de 1983 \n" +
-                                                        "-Opción 2: 12 de diciembre de 19883 \n" +
-                                                        "-Opción 3 12 octubre de 1983\n ", "Nacimiento", 
-                1, listaOpcionesVal, tipoInfoSub);
 
 
-
+            Validacion validacionSubOp = new Validacion(listaMensajesFechas, "Fecha de Nacimiento", 1, listaOpcionesVal, tipoInfoSub);
 
             //Segunda SubOpcion
 
@@ -95,13 +93,14 @@ namespace PPAI_2023
             listaOpcionesVal.Add(codigo2);
             listaOpcionesVal.Add(codigo3);
 
-           
-            Validacion validacionSubOp2 = new Validacion("Seleccione la opción elegida: \n" +
-                                                                "-Opcion1: 3663 \n " +
-                                                                "-Opcion2: 6060 \n " +
-                                                                "-Opcion3: 5986 \n", "Codigo Postal",2,listaOpcionesVal2,tipoInfoSub2);
 
 
+            List<string> listaMensajesCodigo = new List<string>();
+            listaMensajesCodigo.Add("3663");
+            listaMensajesCodigo.Add("6060");
+            listaMensajesCodigo.Add("5986");
+
+            Validacion validacionSubOp2 = new Validacion(listaMensajesCodigo, "Codigo Postal", 2, listaOpcionesVal2, tipoInfoSub2);
 
             List<Validacion> listaValidacionSub = new List<Validacion>();
             listaValidacionSub.Add(validacionSubOp); //cargo la valdiacion de fecha

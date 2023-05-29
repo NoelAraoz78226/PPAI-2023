@@ -22,7 +22,7 @@ namespace PPAI_2023.Clases
         public bool esFinalizada() {
             bool resultado = false;
 
-            if (nombre == "Finalizado")
+            if (nombre == "Finalizada")
             {
                 resultado = true;
             }
@@ -40,5 +40,21 @@ namespace PPAI_2023.Clases
 
             return resultado;
         }
+
+        //ALTERNATIVAS
+        public bool esCancelada()
+        {
+            bool resultado = false;
+
+            if (nombre == "Cancelada")
+            {
+                resultado = true;
+            }
+
+            return resultado;
+        }
+
+
+
     }
 }
